@@ -1,0 +1,26 @@
+{application, telebot,
+  [{description, "An OTP application"},
+    {vsn, "0.1.0"},
+    {registered, []},
+    {mod, {telebot_app, []}},
+    {applications,
+      [kernel,
+        stdlib,
+        cowboy,
+        worker_pool,
+        syn,
+        hackney
+      ]},
+    {env, [
+      {port, 3300},
+      {poll_interval, 2000},
+      {start_poll, false},
+      {workers, 30},
+      {auth_token, ""}
+    ]},
+    {modules, []},
+
+    {maintainers, []},
+    {licenses, []},
+    {links, []}
+  ]}.
