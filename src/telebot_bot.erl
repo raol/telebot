@@ -2,8 +2,8 @@
 -behaviour(gen_server).
 
 -include("telebot_api.hrl").
--define(LIVETIMEOUT, 10 * 60 * 1000).
--define(MINUTES(X), X * 1000).
+-define(LIVETIMEOUT, 1 * 60 * 1000).
+-define(MINUTES(X), X * 60 * 1000).
 
 %% API
 -export([start_link/1]).
@@ -29,10 +29,6 @@ start_link(Id) ->
 
 init([Id]) ->
   {ok, #state{chat_id = Id}}.
-
-%%====================================================================
-%% Private functions
-%%====================================================================
 
 handle_cast(#message{ text = <<"/start">>}, S = #state{ status = idle }) ->
   Buttons = [[[{<<"text">>, <<"/short">>}], [{<<"text">>, <<"/long">>}]], [[{<<"text">>, <<"/cancel">>}]]],
@@ -72,3 +68,7 @@ handle_info(timeout, S = #state{ status = interval, chat_id = ChatId}) ->
 
 terminate(_Reason, _State) ->
   ok.
+
+%%====================================================================
+%% Private functions
+%%====================================================================

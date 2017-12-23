@@ -20,13 +20,14 @@ start_link() ->
 
 %% Child :: {Id,StartFunc,Restart,Shutdown,Type,Modules}
 init([]) ->
+  {ok, Handler} = application:get_env(telebot, bot_handler),
   {ok, {{simple_one_for_one, 10, 1}, [{
     telebot_bot,
-    {telebot_bot, start_link, []},
+    {Handler, start_link, []},
     permanent,
     500,
     worker,
-    [telebot_bot]
+    [Handler]
   }]}}.
 
 add_chat(ChatId) ->

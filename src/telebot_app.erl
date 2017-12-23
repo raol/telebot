@@ -1,6 +1,8 @@
 -module(telebot_app).
 
--behaviour(application).
+-include("records.hrl").
+
+-behavior(application).
 
 %% Application callbacks
 -export([start/2, stop/1]).
@@ -10,6 +12,8 @@
 %%====================================================================
 
 start(_StartType, _StartArgs) ->
+  {ok, _} = application:get_env(telebot, auth_token),
+  {ok, _} = application:get_env(telebot, bot_handler),
   ok = configure_webhook(),
   ok = configure_processors(),
   {ok, SPid} = telebot_sup:start_link(),

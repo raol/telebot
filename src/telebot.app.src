@@ -1,5 +1,5 @@
 {application, telebot,
-  [{description, "An OTP application"},
+  [{description, "Simple telegram bot implementation"},
     {vsn, "0.1.0"},
     {registered, []},
     {mod, {telebot_app, []}},
@@ -11,12 +11,14 @@
         syn,
         hackney
       ]},
+    {included_applications, []},
     {env, [
       {port, 3300},
       {poll_interval, 2000},
       {start_poll, false},
-      {workers, 30},
-      {auth_token, ""}
+      {auth_token, <<"">>},
+      {bot_handler, telebot_bot},
+      {workers, 30}
     ]},
     {modules, []},
 

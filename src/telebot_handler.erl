@@ -7,7 +7,6 @@
 
 handle_hook(Data) ->
   Msg = telebot_parser:parse(update, Data),
-  io:format("Got ~w", [Msg]),
   dispatch(Msg).
 
 handle_poll([]) ->
